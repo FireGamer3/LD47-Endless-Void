@@ -20,18 +20,20 @@ public class EnemySpawner : MonoBehaviour {
 
 
     void Update() {
-        timeLeft -= Time.deltaTime;
-        if (diff > 0.011f) {
-            diffTimerLeft -= Time.deltaTime;
-        }
-        if (timeLeft <= 0f) {
-            timeLeft = Random.Range(0f * diff, 4f * diff);
-            GameObject go = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(leftBound, rightBound), -7.7f, 0), Quaternion.identity);
-            go.transform.parent = this.transform;
-        }
-        if (diffTimerLeft <= 0f && diff > 0.01f) {
-            diff -= 0.01f;
-            diffTimerLeft = 10f;
+        if (GameManager.instance.allowSpawning) {
+            timeLeft -= Time.deltaTime;
+            if (diff > 0.011f) {
+                diffTimerLeft -= Time.deltaTime;
+            }
+            if (timeLeft <= 0f) {
+                timeLeft = Random.Range(0f * diff, 4f * diff);
+                GameObject go = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(leftBound, rightBound), -7.7f, 0), Quaternion.identity);
+                go.transform.parent = this.transform;
+            }
+            if (diffTimerLeft <= 0f && diff > 0.01f) {
+                diff -= 0.01f;
+                diffTimerLeft = 10f;
+            }
         }
     }
 }

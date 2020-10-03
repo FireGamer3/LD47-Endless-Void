@@ -49,5 +49,9 @@ public class Enemy : MonoBehaviour {
             Destroy(col.gameObject);
             Destroy(this.gameObject);
         }
+        if (col.gameObject.tag == "Player") {
+            GameManager.instance.TakeHit();
+            Destroy(this.gameObject);
+        }
     }
 }
