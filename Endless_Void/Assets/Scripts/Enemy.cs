@@ -45,11 +45,13 @@ public class Enemy : MonoBehaviour {
 
     public void CollisionHandler(Collider2D col) {
         if (col.gameObject.tag == "Bullet") {
+            GameManager.instance.playHitSound();
             GameManager.instance.score += Random.Range(1, 15);
             Destroy(col.gameObject);
             Destroy(this.gameObject);
         }
         if (col.gameObject.tag == "Player") {
+            GameManager.instance.playHitSound();
             GameManager.instance.TakeHit();
             Destroy(this.gameObject);
         }

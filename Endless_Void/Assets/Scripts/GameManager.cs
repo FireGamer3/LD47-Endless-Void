@@ -7,11 +7,15 @@ public class GameManager : MonoBehaviour {
 
     public bool allowSpawning = true;
 
+    private AudioSource sound_source;
+    public AudioClip deathSound;
+    public AudioClip hitSound;
     public TMP_Text Score_Text;
     public TMP_Text health;
     public Slider healthslider;
     public GameObject PlayerPrefab;
     private GameObject player;
+    public GameObject gameoverScreen;
 
     private int LastUpdateScore = 0;
     public int score = 0;
@@ -19,11 +23,17 @@ public class GameManager : MonoBehaviour {
     public int hp = 2;
     public int maxHp = 2;
 
+    public void playHitSound() {
+        sound_source.PlayOneShot(hitSound);
+    }
     public void TakeHit() {
+        playHitSound();
         hp -= 1;
         if (hp == 0) {
             Destroy(player);
             allowSpawning = false;
+            gameoverScreen.SetActive(true);
+            sound_source.PlayOneShot(deathSound);
         }
     }
     public void Heal(int amt = 1) {
@@ -34,6 +44,7 @@ public class GameManager : MonoBehaviour {
     }
     public void setMaxHp(int amt = 2) {
         maxHp = amt;
+        healthslider.maxValue = amt;
         if (hp > maxHp) {
             hp = maxHp;
         }
@@ -43,6 +54,7 @@ public class GameManager : MonoBehaviour {
         if (instance == null) {
             instance = this;
             player = Instantiate(PlayerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            sound_source = gameObject.AddComponent<AudioSource>();
         } else if (instance != this) {
             Debug.Log("Game Manager Instance already defined!");
             Destroy(this);
