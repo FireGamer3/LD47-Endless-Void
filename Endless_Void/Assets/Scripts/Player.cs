@@ -5,9 +5,14 @@ public class Player : MonoBehaviour {
 
     private Vector3 MoveDirection = new Vector3();
 
+    public AudioSource sound_source;
+    public AudioClip[] shoot_sounds;
+
     [SerializeField] private float moveSpeed = 3f;
 
     private float LeftBound, RightBound, TopBound, BottomBound;
+
+    public GameObject BulletPrefab;
 
     private void Awake() {
         TopBound = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height, 0)).y;
@@ -17,7 +22,10 @@ public class Player : MonoBehaviour {
 
         movement = new PlayerMovement();
         movement.Player.Movement.performed += _ => Movement_performed(_.ReadValue<Vector2>());
+        movement.Player.mouse_shoot.performed += _ => MouseClick();
         movement.Enable();
+
+        sound_source = gameObject.AddComponent<AudioSource>();
     }
 
     void Start() {
@@ -44,5 +52,27 @@ public class Player : MonoBehaviour {
         Vector3 actualMovement = new Vector3(movement.x, movement.y, 0);
         actualMovement.Normalize();
         MoveDirection = actualMovement;
+    }
+
+    private void MouseClick() {
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float BoundSpace = 1f;
+        Vector3 dir = new Vector3(0, 0, 0);
+        if (worldPos.x >= (transform.position.x + BoundSpace)) {
+            dir.x = 1f;
+        } else if (worldPos.x <= (transform.position.x - BoundSpace)) {
+            dir.x = -1f;
+        }
+        if (worldPos.y >= (transform.position.y + BoundSpace)) {
+            dir.y = 1f;
+        } else if (worldPos.y <= (transform.position.y - BoundSpace)) {
+            dir.y = -1f;
+        }
+        if (dir.x == 0f && dir.y == 0f) {
+            dir.x = 1f;
+        }
+        GameObject go = Instantiate(BulletPrefab, transform.position + dir, Quaternion.identity);
+        sound_source.PlayOneShot(shoot_sounds[Random.Range(0, shoot_sounds.Length)]);
+        go.GetComponent<Bullet>().setMoveDir(dir);
     }
 }

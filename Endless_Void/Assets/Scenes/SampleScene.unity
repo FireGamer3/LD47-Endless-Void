@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597446530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5424,7 +5424,7 @@ GameObject:
   - component: {fileID: 1767513769}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5506,4 +5506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6182e8e139c45944a21303aa2c6d7c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound_source: {fileID: 0}
+  shoot_sounds:
+  - {fileID: 8300000, guid: ed40fbe6aecc4f64db292dd3617ecb8e, type: 3}
+  - {fileID: 8300000, guid: a35b14e91d50f3243aaa29aa977440a3, type: 3}
+  - {fileID: 8300000, guid: 2904657118cb7f5488beb1051c253f04, type: 3}
   moveSpeed: 5
+  BulletPrefab: {fileID: 7632071326546736667, guid: 531017c66bd3d7747b4a24158fdfba65, type: 3}
