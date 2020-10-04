@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
+    private ManueInteractions menuInteractions;
 
     public bool allowSpawning = true;
 
@@ -31,6 +32,10 @@ public class GameManager : MonoBehaviour {
     public void ResetGame() {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    public void goToMainMenu() {
+        SceneManager.LoadScene("Menu");
     }
 
     public void TakeHit() {
@@ -62,10 +67,19 @@ public class GameManager : MonoBehaviour {
             instance = this;
             player = Instantiate(PlayerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             sound_source = gameObject.AddComponent<AudioSource>();
+
+
+            menuInteractions = new ManueInteractions();
+            menuInteractions.Menus.Accept.performed += _ => HandleButtonPress(0);
+            menuInteractions.Menus.Back.performed += _ => HandleButtonPress(1);
+            menuInteractions.Enable();
         } else if (instance != this) {
             Debug.Log("Game Manager Instance already defined!");
             Destroy(this);
         }
+    }
+    private void OnDisable() {
+        menuInteractions.Disable();
     }
 
     public void Update() {
@@ -76,6 +90,20 @@ public class GameManager : MonoBehaviour {
         if (healthslider.value != hp) {
             healthslider.value = hp;
             health.text = hp + "/2";
+        }
+    }
+    private void HandleButtonPress(int type) {
+        if (gameoverScreen.activeSelf) {
+            switch (type) {
+                case 0:
+                    ResetGame();
+                    break;
+                case 1:
+                    goToMainMenu();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
