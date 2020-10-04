@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -26,6 +27,12 @@ public class GameManager : MonoBehaviour {
     public void playHitSound() {
         sound_source.PlayOneShot(hitSound);
     }
+
+    public void ResetGame() {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
     public void TakeHit() {
         playHitSound();
         hp -= 1;
