@@ -539,6 +539,13 @@ MonoBehaviour:
   enemies:
   - {fileID: 995657348113706380, guid: a6fcf67b35e069f41927b5ec910109fc, type: 3}
   - {fileID: 4560176434798651523, guid: 0f9891ae5144edc4eb2e58498bcecfdc, type: 3}
+  - {fileID: 1110414745721216546, guid: fa16fe191b5b21c418cd933fd89dd9e3, type: 3}
+  - {fileID: 3988630449609388595, guid: 8c8603b9c2744b84f998518d17e130d1, type: 3}
+  - {fileID: 8795152622571644759, guid: d9ec0c23aa2c891459172ad72f8894c0, type: 3}
+  - {fileID: 2022077031941485422, guid: 6b4e9448ef7c1c64d8517ab06acf8ece, type: 3}
+  - {fileID: 9082529159474442330, guid: 500387403cd2a4c4f9554eb1969bf7be, type: 3}
+  - {fileID: 5276530521934204585, guid: 97bb03c9fe54d3f4fbf4d24d7302d59c, type: 3}
+  - {fileID: 6659062340258860596, guid: e1bad740e2cf449479acae55c5954a8a, type: 3}
 --- !u!1 &616298753
 GameObject:
   m_ObjectHideFlags: 0
