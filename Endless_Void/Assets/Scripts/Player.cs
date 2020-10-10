@@ -52,10 +52,12 @@ public class Player : MonoBehaviour {
         }
         transform.Translate(MoveDirection * moveSpeed * Time.deltaTime);
 
+        if (shoot_gamepad_timer >= 0f) {
+            shoot_gamepad_timer -= Time.deltaTime;
+        }
 
         if ((shootDir_gamepad.x >= 0.1f || shootDir_gamepad.x <= -0.1f) ||
           (shootDir_gamepad.y >= 0.1f || shootDir_gamepad.y <= -0.1f)) {
-            shoot_gamepad_timer -= Time.deltaTime;
             if (shoot_gamepad_timer <= 0f) {
                 Shoot(shootDir_gamepad);
                 shoot_gamepad_timer = 0.25f;
@@ -91,7 +93,10 @@ public class Player : MonoBehaviour {
         if (dir.x == 0f && dir.y == 0f) {
             dir.x = 1f;
         }
-        Shoot(dir);
+        if (shoot_gamepad_timer <= 0f) {
+            Shoot(dir);
+            shoot_gamepad_timer = 0.2f;
+        }
     }
 
     public void Shoot(Vector3 dir) {

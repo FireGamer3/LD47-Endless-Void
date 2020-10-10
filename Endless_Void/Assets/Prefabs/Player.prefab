@@ -102,7 +102,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ed40fbe6aecc4f64db292dd3617ecb8e, type: 3}
   - {fileID: 8300000, guid: a35b14e91d50f3243aaa29aa977440a3, type: 3}
   - {fileID: 8300000, guid: 2904657118cb7f5488beb1051c253f04, type: 3}
-  moveSpeed: 5
+  moveSpeed: 3
   BulletPrefab: {fileID: 7632071326546736667, guid: 531017c66bd3d7747b4a24158fdfba65, type: 3}
 --- !u!50 &172637348393963743
 Rigidbody2D:

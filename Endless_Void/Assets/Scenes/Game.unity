@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047fa1868cc40ec4caa2dd0f0f733360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diff: 0.69
+  diff: 0.45
   enemies:
   - {fileID: 995657348113706380, guid: a6fcf67b35e069f41927b5ec910109fc, type: 3}
   - {fileID: 4560176434798651523, guid: 0f9891ae5144edc4eb2e58498bcecfdc, type: 3}
