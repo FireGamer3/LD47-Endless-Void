@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour {
     private Vector3 moveDirection;
     private float moveSpeed = 7f;
 
+    public bool MoveToPoint = false;
+
     private void Awake() {
         TopBound = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height, 0)).y + 1f;
         BottomBound = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, 0, 0)).y - 1f;
@@ -13,7 +15,11 @@ public class Bullet : MonoBehaviour {
     }
 
     private void Update() {
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+        if (!MoveToPoint) {
+            transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+        } else {
+            transform.position = Vector3.MoveTowards(transform.position, moveDirection * 1000f, moveSpeed * Time.deltaTime);
+        }
     }
 
     public void setMoveDir(Vector3 dir) {

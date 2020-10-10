@@ -78,23 +78,13 @@ public class Player : MonoBehaviour {
 
     private void MouseClick() {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float BoundSpace = 0.7f;
         Vector3 dir = new Vector3(0, 0, 0);
-        if (worldPos.x >= (transform.position.x + BoundSpace)) {
-            dir.x = 1f;
-        } else if (worldPos.x <= (transform.position.x - BoundSpace)) {
-            dir.x = -1f;
-        }
-        if (worldPos.y >= (transform.position.y + BoundSpace)) {
-            dir.y = 1f;
-        } else if (worldPos.y <= (transform.position.y - BoundSpace)) {
-            dir.y = -1f;
-        }
-        if (dir.x == 0f && dir.y == 0f) {
-            dir.x = 1f;
-        }
+
+        dir = worldPos - transform.position;
+        dir.z = 0;
+
         if (shoot_gamepad_timer <= 0f) {
-            Shoot(dir);
+            Shoot_mouse(dir);
             shoot_gamepad_timer = 0.2f;
         }
     }
@@ -103,5 +93,11 @@ public class Player : MonoBehaviour {
         GameObject go = Instantiate(BulletPrefab, transform.position + dir, Quaternion.identity);
         sound_source.PlayOneShot(shoot_sounds[Random.Range(0, shoot_sounds.Length)]);
         go.GetComponent<Bullet>().setMoveDir(dir);
+    }
+    public void Shoot_mouse(Vector3 dir) {
+        GameObject go = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+        sound_source.PlayOneShot(shoot_sounds[Random.Range(0, shoot_sounds.Length)]);
+        go.GetComponent<Bullet>().setMoveDir(dir);
+        go.GetComponent<Bullet>().MoveToPoint = true;
     }
 }
